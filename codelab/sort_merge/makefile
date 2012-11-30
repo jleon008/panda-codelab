@@ -11,7 +11,7 @@ GTEST_DIR = ../../gtest
 CPPFLAGS += -I$(GTEST_DIR)/include
 
 # Flags passed to the C++ compiler.
-CXXFLAGS += -g -Wall -Wextra -std=c++0x
+CXXFLAGS += -g -Wall -Wextra
 
 # All tests produced by this Makefile.
 TESTS = mergesort_test

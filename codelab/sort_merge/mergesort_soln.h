@@ -3,20 +3,25 @@
 
 #include <vector>
 #include <algorithm>
+#include <functional>
+#include <iterator>
 
 using std::vector;
 using std::copy;
+using std::less;
+using std::iterator_traits;
 
 namespace codelab {
 
-/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 // V1 merge sort
 // 1. Use vector<T> only
 // 2. Assume T has operator< overloaded
+// 3. Allocate vectors on stack (better to do on heap with scoped ptr).
 template<typename T>
 void merge_sort(const vector<T>& input, vector<T>& output) {
   size_t len = input.size();
-  output.resize(input.size());
+  output.resize(len);
   if (len == 0 || len == 1) {
     copy(input.begin(), input.end(), output.begin());
     return;
@@ -64,6 +69,52 @@ void merge(const vector<T>& a, const vector<T>& b, vector<T>& merged) {
   while (b_iter != b.end()) {
     *merged_iter = *b_iter;
     ++b_iter, ++merged_iter;
+  }
+}
+
+/////////////////////////////////////////////////////////////////////////
+// V2 merge sort
+// 3. Allocate vectors on stack (better to do on heap with scoped ptr).
+template<typename InputIterator,
+         typename OutputIterator,
+         typename Comparator>
+void merge_sort(InputIterator begin,
+                InputIterator end,
+                OutputIterator output) {
+  typedef typename iterator_traits<InputIterator>::value_type T;
+  // TODO(zhsun):
+}
+
+template<typename InputIterator,
+         typename OutputIterator>
+void merge(InputIterator begin1, InputIterator end1,
+           InputIterator begin2, InputIterator end2,
+           OutputIterator output) {
+  merge(begin1, end1, begin2, end2, output,
+        less<typename iterator_traits<InputIterator>::value_type>());
+}
+
+template<typename InputIterator,
+         typename OutputIterator,
+         typename Comparator>
+void merge(InputIterator begin1, InputIterator end1,
+           InputIterator begin2, InputIterator end2,
+           OutputIterator output, Comparator comparator) {
+  while (begin1 != end1 &&
+         begin2 != end2) {
+    if (comparator(*begin1, *begin2)) {
+      *output++ = *begin1++;
+    } else {
+      *output++ = *begin2++;
+    }
+  }
+
+  while (begin1 != end1) {
+    copy(begin1, end1, output);
+  }
+
+  while (begin2 != end2) {
+    copy(begin2, end2, output);
   }
 }
 

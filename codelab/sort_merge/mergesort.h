@@ -3,8 +3,15 @@
 
 namespace codelab {
 
-template<typename Iter1, typename Iter2 = Iter1>
-void merge_sort(Iter1 begin, Iter1 end, Iter2 out) {
+///////////////////////////////////////////
+// V0 merge sort
+void merge_sort(const vector<int>& input, vector<int>& output) {
+}
+
+///////////////////////////////////////////
+// V1 merge sort
+template<typename T>
+void merge_sort(const vector<T>& input, vector<T>& output) {
 }
 
 }  // codelab
