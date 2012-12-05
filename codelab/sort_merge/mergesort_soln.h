@@ -118,6 +118,6 @@ void merge(InputIterator begin1, InputIterator end1,
   }
 }
 
-}  // codelab
+}  // namespace codelab
 
 #endif  // CODELAB_MERGESORT_SOLN_H_

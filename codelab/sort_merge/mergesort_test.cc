@@ -145,4 +145,4 @@ TEST(MergeSortV2Test, TestMergeTwoShortNonemptyList) {
   EXPECT_EQ(expected_output, output);
 }
 
-}
+}  // namespace codelab
