@@ -34,7 +34,7 @@ class Heap {
   bool push(const T& elem);
 
   Heap() : max_size_(numeric_limits<size_t>::max()) { }
-  Heap(size_t max_size) : max_size_(max_size) { }
+  explicit Heap(size_t max_size) : max_size_(max_size) { }
   virtual ~Heap() { }
 
  private:
