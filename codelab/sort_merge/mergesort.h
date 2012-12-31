@@ -5,13 +5,13 @@ namespace codelab {
 
 ///////////////////////////////////////////
 // V0 merge sort
-void merge_sort(const vector<int>& input, vector<int>& output) {
+void merge_sort(const vector<int>& input, vector<int>* output) {
 }
 
 ///////////////////////////////////////////
 // V1 merge sort
 template<typename T>
-void merge_sort(const vector<T>& input, vector<T>& output) {
+void merge_sort(const vector<T>& input, vector<T>* output) {
 }
 
 }  // codelab

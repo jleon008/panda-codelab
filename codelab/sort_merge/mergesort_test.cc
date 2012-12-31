@@ -1,5 +1,5 @@
 #include "mergesort_soln.h"
-//#include "mergesort.h"
+#include "mergesort.h"
 
 #include <vector>
 #include <list>
@@ -11,20 +11,23 @@ using std::sort;
 using std::list;
 using std::greater;
 
-namespace codelab {
+using codelab_soln::merge;
+using codelab_soln::merge_sort;
+
+namespace codelab_test {
 
 //////////////////////////////////////////////////////////
-// Test V1 merge sort
+// Test V0 merge sort
 // 1. Test merge function
-TEST(MergeSortV1Test, TestMergeTwoEmptyVectors) {
+TEST(MergeSortV0Test, TestMergeTwoEmptyVectors) {
   vector<int> empty_input;
   vector<int> output;
 
-  merge(empty_input, empty_input, output);
+  merge(empty_input, empty_input, &output);
   EXPECT_EQ((size_t) 0, output.size());
 }
 
-TEST(MergeSortV1Test, TestMergeEmptyVectorWithNonemptyVector) {
+TEST(MergeSortV0Test, TestMergeEmptyVectorWithNonemptyVector) {
   vector<int> empty_input;
   vector<int> nonempty_input;
   nonempty_input.push_back(1);
@@ -32,11 +35,11 @@ TEST(MergeSortV1Test, TestMergeEmptyVectorWithNonemptyVector) {
   nonempty_input.push_back(3);
   vector<int> output;
 
-  merge(empty_input, nonempty_input, output);
+  merge(empty_input, nonempty_input, &output);
   EXPECT_EQ(nonempty_input, output);
 }
 
-TEST(MergeSortV1Test, TestMergeTwoShortNonemptyVector) {
+TEST(MergeSortV0Test, TestMergeTwoShortNonemptyVector) {
   int len = 10;
   vector<int> input_a(len);
   vector<int> input_b(len);
@@ -49,11 +52,11 @@ TEST(MergeSortV1Test, TestMergeTwoShortNonemptyVector) {
     expected_output[2 * i + 1] = i;
   }
 
-  merge(input_a, input_b, output);
+  merge(input_a, input_b, &output);
   EXPECT_EQ(expected_output, output);
 }
 
-TEST(MergeSortV1Test, TestMergeOneShortVectorOneLongVector) {
+TEST(MergeSortV0Test, TestMergeOneShortVectorOneLongVector) {
   int short_len = 10;
   int long_len = 100;
   vector<int> input_short(short_len);
@@ -69,20 +72,28 @@ TEST(MergeSortV1Test, TestMergeOneShortVectorOneLongVector) {
   }
   sort(expected_output.begin(), expected_output.end());
 
-  merge(input_short, input_long, output);
+  merge(input_short, input_long, &output);
   EXPECT_EQ(expected_output, output);
 }
 
 // 2. Test merge sort
-TEST(MergeSortV1Test, TestSortEmptyVector) {
+TEST(MergeSortV0Test, TestSortEmptyVector) {
   vector<int> empty_input;
   vector<int> output;
 
-  merge_sort(empty_input, output);
+  merge_sort(empty_input, &output);
   EXPECT_EQ((size_t) 0, output.size());
 }
 
-TEST(MergeSortV1Test, TestSortNonemptyVector) {
+TEST(MergeSortV0Test, TestSortSingleElemVector) {
+  vector<int> single_elem_input;
+  single_elem_input.push_back(1);
+  vector<int> output;
+  merge_sort(single_elem_input, &output);
+  EXPECT_EQ(single_elem_input, output);
+}
+
+TEST(MergeSortV0Test, TestSortNonemptyVector) {
   int len = 10;
   vector<int> input(len);
   vector<int> output;
@@ -92,56 +103,7 @@ TEST(MergeSortV1Test, TestSortNonemptyVector) {
     input[i] = len - i - 1;
     expected_output[i] = i;
   }
-  merge_sort(input, output);
-  EXPECT_EQ(expected_output, output);
-}
-
-//////////////////////////////////////////////////////////
-// Test V2 merge sort
-// 1. Test merge function
-TEST(MergeSortV2Test, TestMergeTwoEmptyLists) {
-  list<int> empty_input;
-  list<int> output;
-
-  merge(empty_input.begin(), empty_input.end(),
-        empty_input.begin(), empty_input.end(),
-        output.begin());
-  EXPECT_EQ((size_t) 0, output.size());
-}
-
-TEST(MergeSortV2Test, TestMergeEmptyListWithNonemptyList) {
-  list<int> empty_input;
-  list<int> nonempty_input;
-  nonempty_input.push_back(1);
-  nonempty_input.push_back(2);
-  nonempty_input.push_back(3);
-  list<int> output(nonempty_input.size());
-
-  merge(empty_input.begin(), empty_input.end(),
-        nonempty_input.begin(), nonempty_input.end(),
-        output.begin());
-  EXPECT_EQ(nonempty_input, output);
-}
-
-TEST(MergeSortV2Test, TestMergeTwoShortNonemptyList) {
-  int len = 5;
-  list<int> input_a;
-  input_a.push_back(1);
-  input_a.push_back(2);
-  input_a.push_back(3);
-  list<int> input_b;
-  input_b.push_back(4);
-  input_b.push_back(5);
-
-  list<int> output(5);
-  list<int> expected_output;
-  for (int i = 0; i < len; i++) {
-    expected_output.push_back(i+1);
-  }
-
-  merge(input_a.begin(), input_a.end(),
-        input_b.begin(), input_b.end(),
-        output.begin());
+  merge_sort(input, &output);
   EXPECT_EQ(expected_output, output);
 }
 
