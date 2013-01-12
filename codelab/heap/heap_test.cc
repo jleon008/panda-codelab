@@ -1,9 +1,11 @@
 #include "heap_soln.h"
-//#include "heap.h"
+#include "heap.h"
 
 #include "gtest/gtest.h"
 
-namespace codelab {
+using codelab_soln::Heap;
+
+namespace codelab_test {
 
 class HeapTest : public testing::Test {
  public:

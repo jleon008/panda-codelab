@@ -14,7 +14,7 @@ using std::make_heap;
 using std::push_heap;
 using std::pop_heap;
 
-namespace codelab {
+namespace codelab_soln {
 
 template<typename T,
          typename Comparator = less<T> >
