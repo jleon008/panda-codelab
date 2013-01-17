@@ -6,7 +6,8 @@
 
 namespace codelab {
 
-size_t substr2chars(const std::string& str, std::string* substr);
+// Find the longest substr with at most 2 disctinct chars.
+int substr2chars(const std::string& str, std::string* substr);
 
 }
 

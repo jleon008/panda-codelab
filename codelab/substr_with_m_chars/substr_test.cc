@@ -48,4 +48,10 @@ TEST_F(SubstrTest, TestWithAlternate3charStr) {
   EXPECT_EQ(2, substr2chars(str, &substr_));
 }
 
+TEST_F(SubstrTest, TestWith3CharStr) {
+  const string str = "abbcccdddde";
+  EXPECT_EQ(7, substr2chars(str, &substr_));
+  EXPECT_EQ("cccdddd", substr_);
+}
+
 }
